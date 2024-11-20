@@ -1,4 +1,4 @@
-const singUp = document.getElementById("singUp");
+const signUp = document.getElementById("singUp");
 
 const User = document.getElementById("User");
 const Email = document.getElementById("Email");
@@ -6,8 +6,7 @@ const Password = document.getElementById("Password");
 
 const userLocal = JSON.parse(localStorage.getItem("Users")) || [];
 
-
-singUp.addEventListener("submit", function (events) {
+signUp.addEventListener("submit", function (events) {
     events.preventDefault();
     const Account = 
     {   
@@ -17,6 +16,6 @@ singUp.addEventListener("submit", function (events) {
         pass: Password.value,
     };
     userLocal.push(Account);
-    localStorage.setItem("Account", JSON.stringify(userLocal));
+    localStorage.setItem("Users", JSON.stringify(userLocal));
     window.location.href = "index.html";
 });
