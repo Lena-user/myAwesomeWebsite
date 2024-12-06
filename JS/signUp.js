@@ -17,5 +17,5 @@ signUp.addEventListener("submit", function (events) {
     };
     userLocal.push(Account);
     localStorage.setItem("Users", JSON.stringify(userLocal));
-    window.location.href = "index.html";
+    window.location.href = "signIn.html";
 });
