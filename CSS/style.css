@@ -47,6 +47,27 @@ body {
     transition: .3s;
 }
 
+.input-box .upload-field {
+    width: 100%;
+    height: 60px;
+    font-size: 17px;
+    padding: 5px;
+    margin-bottom: 15px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+}
+
+::-webkit-file-upload-button {
+    color: white;
+    background: #222;
+    padding: 15px 20px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
 ::placeholder {
     font-weight: 500;
     color: #222;
@@ -110,18 +131,3 @@ section a {
     cursor: pointer;
 }
 
-.submit-btn:hover {
-    background: #000;
-    transform: scale(1.05, 1);
-}
-
-.sign-up-link {
-    text-align: center;
-    font-size: 15px;
-    margin-top: 20px;
-}
-
-.sign-up-link a {
-    color: #000;
-    font-weight: 600;
-}
