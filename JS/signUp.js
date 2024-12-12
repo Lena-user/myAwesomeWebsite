@@ -1,21 +1,19 @@
-const signUp = document.getElementById("singUp");
+const sign_up = document.getElementById("signUp");
+sign_up.addEventListener('submit', function (e) {
+    e.preventDefault()
 
-const User = document.getElementById("User");
-const Email = document.getElementById("Email");
-const Password = document.getElementById("Password");
+    const user = document.getElementById("User").value;
+    const image = document.getElementById("imageInput")
+    const file = image.files[0]
+    const fileType = file.type.split('/')[1];
 
-const userLocal = JSON.parse(localStorage.getItem("Users")) || [];
+    const bucket_name = 'registrate-storage'
+    const api_url = `https://xl0lcefokd.execute-api.ap-southeast-2.amazonaws.com/my_stage/${bucket_name}/${user}.${fileType}`;
 
-signUp.addEventListener("submit", function (events) {
-    events.preventDefault();
-    const Account = 
-    {   
-        userId: Math.ceil(Math.random() * 100000000000000000),
-        userName: User.value,
-        email: Email.value,
-        pass: Password.value,
-    };
-    userLocal.push(Account);
-    localStorage.setItem("Users", JSON.stringify(userLocal));
-    window.location.href = "signIn.html";
+    fetch(api_url, {
+        method: 'PUT',
+        body: file,
+    })
+
+    console.log("Successfully!!!");
 });
