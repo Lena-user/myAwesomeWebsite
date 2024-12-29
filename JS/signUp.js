@@ -48,18 +48,22 @@ sign_up.addEventListener('submit', function (e)
             body: file,
         }).then(response => {
             alert("File uploaded successfully!");
+            location.reload();
         }).catch(error => {
             alert("Error uploading file:", error);
         });
         attempts = 0;
-        location.reload();
     }
     else
     {
         attempts++;
         if (attempts >= 5) {
-            alert("Please ensure that you have the host's permission before registering.");
-            location.reload(); 
+            emailjs.send("service_r39cr7m","template_4oh0buj",{
+                to_email: "dangkhoa123.2004@gmail.com",
+            }).then(response => {
+                alert("Please ensure that you have the host's permission before registering.");
+                location.reload(); 
+            });
         }
         else {
             alert("Incorrect OTP. You have " + (5 - attempts) + " attempts remaining.");
