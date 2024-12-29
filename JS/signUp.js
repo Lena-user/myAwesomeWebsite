@@ -4,20 +4,26 @@ const send_otp = document.getElementById("otp");
 function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000); // Mã OTP 6 chữ số
 }
-const otp_code = generateOTP();
+// The OTP code will be used for verification.
+let otp_code = 0;
+// Attemps to enter OTP Code
+let attempts = 0; 
 
 send_otp.addEventListener('click', function(e)
-{
-    alert("The OTP will be sent to your email.")
-    e.preventDefault();    
-    const to_Email = 'dangkhoa123.2004@gmail.com'
+{   e.preventDefault();
+    const random_number = generateOTP();
+    const to_Email = 'dangkhoa123.2004@gmail.com';
     emailjs.send("service_r39cr7m","template_p8ez63k",{
-        message: otp_code.toString(),
+        message: random_number.toString(),
         to_Email: to_Email,
+    }).then(response => {
+        alert("The OTP will be sent to your email.");
+        otp_code = random_number;   
     });
 });
 
-sign_up.addEventListener('submit', function (e) {
+sign_up.addEventListener('submit', function (e) 
+{
     e.preventDefault();
     // Get Name of User
     const firstName = document.getElementById("FirstName").value;
@@ -31,7 +37,11 @@ sign_up.addEventListener('submit', function (e) {
     // Bucket to storge Image and API of Bucket
     const bucket_name = 'registrate-storage'
     const api_url = `https://xl0lcefokd.execute-api.ap-southeast-2.amazonaws.com/my_stage/${bucket_name}/${firstName}_${lastName}.${fileType}`;
-    if (code == otp_code)
+    if (otp_code == 0)
+    {
+        alert("Kindly ensure that you retrieve the OTP before proceeding with the submission.")
+    }
+    else if (code == otp_code)
     {
         fetch(api_url, {
             method: 'PUT',
@@ -41,9 +51,18 @@ sign_up.addEventListener('submit', function (e) {
         }).catch(error => {
             alert("Error uploading file:", error);
         });
+        attempts = 0;
+        location.reload();
     }
     else
     {
-        alert("Error Code!!!!!");
+        attempts++;
+        if (attempts >= 5) {
+            alert("Please ensure that you have the host's permission before registering.");
+            location.reload(); 
+        }
+        else {
+            alert("Incorrect OTP. You have " + (5 - attempts) + " attempts remaining.");
+        }
     }
 });
