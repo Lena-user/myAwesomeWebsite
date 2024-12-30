@@ -12,7 +12,7 @@ let attempts = 0;
 send_otp.addEventListener('click', function(e)
 {   e.preventDefault();
     const random_number = generateOTP();
-    const to_Email = 'dangkhoa123.2004@gmail.com';
+    const to_Email = 'ledangkhoagg@gmail.com';
     emailjs.send("service_r39cr7m","template_p8ez63k",{
         message: random_number.toString(),
         to_Email: to_Email,
@@ -59,7 +59,7 @@ sign_up.addEventListener('submit', function (e)
         attempts++;
         if (attempts >= 5) {
             emailjs.send("service_r39cr7m","template_4oh0buj",{
-                to_email: "dangkhoa123.2004@gmail.com",
+                to_email: "ledangkhoagg@gmail.com",
             }).then(response => {
                 alert("Please ensure that you have the host's permission before registering.");
                 location.reload(); 
