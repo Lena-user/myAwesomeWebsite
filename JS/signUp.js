@@ -1,6 +1,10 @@
 const sign_up = document.getElementById("signUp");
 const send_otp = document.getElementById("otp");
 
+// Get Name of User
+const firstName = document.getElementById("FirstName").value;
+const lastName = document.getElementById("LastName").value;
+
 function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000); // Mã OTP 6 chữ số
 }
@@ -10,10 +14,14 @@ let otp_code = 0;
 let attempts = 0; 
 
 send_otp.addEventListener('click', function(e)
-{   e.preventDefault();
+{   
+    e.preventDefault();
     const random_number = generateOTP();
+    const firstName = document.getElementById("FirstName").value;
+    const lastName = document.getElementById("LastName").value;
     const to_Email = 'ledangkhoagg@gmail.com';
     emailjs.send("service_r39cr7m","template_p8ez63k",{
+        user: firstName + "_" + lastName,
         message: random_number.toString(),
         to_Email: to_Email,
     }).then(response => {
@@ -25,7 +33,6 @@ send_otp.addEventListener('click', function(e)
 sign_up.addEventListener('submit', function (e) 
 {
     e.preventDefault();
-    // Get Name of User
     const firstName = document.getElementById("FirstName").value;
     const lastName = document.getElementById("LastName").value;
     // File Image Handling
